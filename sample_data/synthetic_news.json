@@ -1,0 +1,4 @@
+[
+  {"fixture_label": "SYNTHETIC", "title": "Synthetic rates signal", "url": "https://example.test/synthetic/rates-001", "summary": "Offline fixture only."},
+  {"fixture_label": "SYNTHETIC", "title": "Synthetic energy update", "url": "https://example.test/synthetic/energy-002", "summary": "Offline fixture only."}
+]

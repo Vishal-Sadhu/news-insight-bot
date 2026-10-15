@@ -31,6 +31,16 @@ cp .env.example .env
 
 The current command confirms the scaffold is ready and intentionally does not run an unfinished pipeline.
 
+Run the fully offline synthetic pipeline with:
+
+```bash
+.venv/bin/python main.py --demo
+```
+
+The demo uses `sample_data/synthetic_feed.xml`, fresh in-memory state, and
+writes `reports/latest-demo.md`. It does not call the network or alter the
+live SQLite state or `reports/latest.md`.
+
 ## Test
 
 ```bash

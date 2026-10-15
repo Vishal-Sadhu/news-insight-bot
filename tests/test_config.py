@@ -7,7 +7,7 @@ def test_defaults_are_valid_and_resolve_relative_paths(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
     settings = load_settings(environ={})
     assert settings.output_dir == tmp_path / "reports"
-    assert settings.state_path == tmp_path / "data" / "market_agent.sqlite3"
+    assert settings.state_path == tmp_path / "data" / "state.sqlite3"
     assert settings.rss_urls[0].startswith("https://")
 
 
@@ -28,5 +28,5 @@ def test_paths_must_be_safe_relative_paths(value):
 
 
 def test_urls_must_be_http_or_https():
-    with pytest.raises(ValueError, match="invalid HTTP\(S\) URL"):
+    with pytest.raises(ValueError, match=r"invalid HTTP\(S\) URL"):
         load_settings({"RSS_URLS": '["ftp://example.com/feed"]'}, environ={})

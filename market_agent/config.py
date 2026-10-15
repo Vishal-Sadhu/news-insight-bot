@@ -50,7 +50,7 @@ class Settings:
     def state_path(self) -> Path:
         """Return the SQLite state path under the configured data directory."""
 
-        return self.data_dir / "market_agent.sqlite3"
+        return self.data_dir / "state.sqlite3"
 
 
 def _parse_json_array(name: str, value: object) -> list[object]:
