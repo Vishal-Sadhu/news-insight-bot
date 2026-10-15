@@ -1,0 +1,19 @@
+# Regenerate with: .venv/bin/pip-compile --constraint=requirements.txt --output-file=requirements-dev.txt requirements-dev.in
+-c requirements.txt
+
+build==1.2.2.post1
+    # via pip-tools
+click==8.1.8
+    # via pip-tools
+iniconfig==2.0.0
+    # via pytest
+packaging==24.2
+    # via build, pytest
+pip-tools==7.4.1
+pluggy==1.5.0
+    # via pytest
+pyproject-hooks==1.2.0
+    # via build
+pytest==8.3.4
+setuptools==75.6.0
+    # via pip-tools
