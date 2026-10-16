@@ -1,6 +1,6 @@
 # Autonomous Market & News Intelligence Agent
 
-Initial Python 3.11 scaffold for a separated market/news intelligence pipeline. Fetching, processing, analysis, persistence, reporting, and orchestration boundaries are present; the pipeline implementation will be added in subsequent steps.
+Python 3.11 implementation of a separated market/news intelligence pipeline. It continuously observes configured RSS/Atom feeds, selects unseen relevant items, performs deterministic sentiment and catalyst analysis, publishes Markdown reports, remembers processed IDs, and recovers from transient cycle failures. It does not use an LLM or claim model-based reasoning.
 
 ## Setup
 
@@ -26,15 +26,27 @@ cp .env.example .env
 
 ```bash
 .venv/bin/python main.py --help
-.venv/bin/python main.py
+.venv/bin/python main.py run-once
+.venv/bin/python main.py watch --interval 900
 ```
 
-The current command confirms the scaffold is ready and intentionally does not run an unfinished pipeline.
+Options must follow the subcommand, for example:
+
+```bash
+.venv/bin/python main.py run-once --output-dir reports --data-dir data --log-level INFO
+```
+
+`run-once` returns 0 for a published full, partial-source, or no-new-items
+report; 1 for source-wide or runtime failures; and 2 for invalid arguments or
+configuration. `watch` runs the first cycle immediately, then waits
+interruptibly and sequentially between cycles. SIGINT and SIGTERM request a
+graceful shutdown. Failed cycles use bounded exponential recovery backoff,
+which resets after success.
 
 Run the fully offline synthetic pipeline with:
 
 ```bash
-.venv/bin/python main.py --demo
+.venv/bin/python main.py run-once --demo
 ```
 
 The demo uses `sample_data/synthetic_feed.xml`, fresh in-memory state, and

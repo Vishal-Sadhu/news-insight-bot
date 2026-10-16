@@ -66,6 +66,11 @@ class StateStore:
             row = connection.execute("SELECT * FROM runs WHERE run_id = ?", (run_id,)).fetchone()
         return dict(row) if row else None
 
+    def close(self) -> None:
+        """Connections are short-lived per operation; retained for lifecycle symmetry."""
+
+        return None
+
 
 SQLiteState = StateStore
 State = StateStore
@@ -86,3 +91,6 @@ class InMemoryState:
 
     def record_run(self, run_id: str, **values: Any) -> None:
         self.runs[run_id] = dict(values)
+
+    def close(self) -> None:
+        return None
